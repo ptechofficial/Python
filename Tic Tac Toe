@@ -1,4 +1,5 @@
 #Making a TicTacToe game using the basics of python
+import sys
 board = [[0,1,0]
 		,[0,0,0]
 		,[0,2,0]]
@@ -22,4 +23,72 @@ def print_board(current_board):
 		if count!=len(current_board)-1:
 			print('  ----------')
 		count+=1
+print_board(board) 
+
+def input_board(current_board,current_player):
+	print("\t Current Player : ",current_player)
+
+	row = int(input("Which row would you like to play? "))
+	col = int(input("Which col would you like to play? "))
+
+	try:
+		if current_board[row][col] == 0:
+			current_board[row][col] = current_player
+		else:
+			print("This position is already occupied, try again")
+			input_board(current_board,current_player)
+	except IndexError as e:
+		print("Make sure to enter row and col as 0,1 or 2",e)
+		input_board(current_board,current_player)
+	except Exception as e:
+		print("Something went wrong",e)
+		input_board(current_board,current_player)
+
+
+def all_same(current_list):
+	if current_list.count(current_list[0])==len(current_list) and current_list[0]!=0:
+		return True
+	else:
+		return False
+def check_win(current_board):
+
+	#Horizontal Win
+	for row in current_board:
+		if all_same(row):
+			print(f'Player {row[0]} is the winner')
+			return True
+	#Vertical win
+
+	for i in range(len(current_board)):
+		val_v=[]
+		for j in range(len(current_board)):
+			val_v.append(current_board[j][i])
+		if all_same(val_v):
+			print(f'Player {val_v[0]} is the winner')
+			return True
+
+	#Diagonal Win
+	#left diagonal
+	val_ld = []
+	for i in range(len(current_board)):
+		val_ld.append(current_board[i][i])
+	if all_same(val_ld):
+		print(f'Player {val_ld[0]} is the winner')
+		return True
+	# Right Diagonal
+	val_rd = []
+	for k in range(len(current_board)):
+		for l in range(len(current_board)):
+			if k+l == len(current_board) - 1:
+				val_rd.append(current_board[k][l])
+	if all_same(val_rd):
+		print(f'Player {val_rd[0]} is the winner')
+		return True
+
+
+input_board(board,1)
 print_board(board)
+
+sys.stdin.readline()
+
+
