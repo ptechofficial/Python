@@ -1,0 +1,18 @@
+def input_board(current_board,current_player):
+	print("\t Current Player : ",current_player)
+
+	row = int(input("Which row would you like to play? "))
+	col = int(input("Which col would you like to play? "))
+
+	try:
+		if current_board[row][col] == 0:
+			current_board[row][col] = current_player
+		else:
+			print("This position is already occupied, try again")
+			input_board(current_board,current_player)
+	except IndexError as e:
+		print("Make sure to enter row and col as 0,1 or 2",e)
+		input_board(current_board,current_player)
+	except Exception as e:
+		print("Something went wrong",e)
+		input_board(current_board,current_player)
