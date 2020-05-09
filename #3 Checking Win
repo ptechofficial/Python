@@ -1,0 +1,39 @@
+def all_same(current_list):
+	if current_list.count(current_list[0])==len(current_list) and current_list[0]!=0:
+		return True
+	else:
+		return False
+def check_win(current_board):
+
+	#Horizontal Win
+	for row in current_board:
+		if all_same(row):
+			print(f'Player {row[0]} is the winner')
+			return True
+	#Vertical win
+
+	for i in range(len(current_board)):
+		val_v=[]
+		for j in range(len(current_board)):
+			val_v.append(current_board[j][i])
+		if all_same(val_v):
+			print(f'Player {val_v[0]} is the winner')
+			return True
+
+	#Diagonal Win
+	#left diagonal
+	val_ld = []
+	for i in range(len(current_board)):
+		val_ld.append(current_board[i][i])
+	if all_same(val_ld):
+		print(f'Player {val_ld[0]} is the winner')
+		return True
+	# Right Diagonal
+	val_rd = []
+	for k in range(len(current_board)):
+		for l in range(len(current_board)):
+			if k+l == len(current_board) - 1:
+				val_rd.append(current_board[k][l])
+	if all_same(val_rd):
+		print(f'Player {val_rd[0]} is the winner')
+		return True
